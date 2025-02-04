@@ -17,8 +17,8 @@ function App() {
   const { instance, accounts } = useMsal();
   console.log(accounts)
   const { loading, error, data } = useQuery(GET_DATA);
-
   const fetchToken = async () => {
+    await instance.initialize();
     const tokenResponse = await instance.acquireTokenSilent({
       scopes: ["api://1def8333-5f90-4bd2-ba69-294b0a52e80a/user_impersonation"]
     });
