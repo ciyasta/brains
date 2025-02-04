@@ -1,6 +1,6 @@
 import { useMsal } from "@azure/msal-react";
 
-const LoginButton = () => {
+function LoginButton() {
   const { instance } = useMsal();
 
   const handleLogin = () => {
