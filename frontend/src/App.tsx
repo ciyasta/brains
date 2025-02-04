@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -14,9 +14,21 @@ const GET_DATA = gql`
 
 function App() {
   const [count, setCount] = useState(0)
-  const { accounts } = useMsal();
+  const { instance, accounts } = useMsal();
   console.log(accounts)
   const { loading, error, data } = useQuery(GET_DATA);
+
+  const fetchToken = async () => {
+    const tokenResponse = await instance.acquireTokenSilent({
+      scopes: ["api://1def8333-5f90-4bd2-ba69-294b0a52e80a/user_impersonation"]
+    });
+    console.log(tokenResponse)
+  }
+
+  useEffect(() => {
+    fetchToken()
+  }, [])
+
   if (accounts.length === 0) {
     return <LoginButton />
   }
