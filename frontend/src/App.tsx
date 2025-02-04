@@ -26,6 +26,7 @@ function App() {
     console.log(tokenResponse)
     const authToken = await fetch("https://yoga-server.thankfulbush-f35cdce5.southindia.azurecontainerapps.io/.auth/login/aad", {
       method: 'POST',
+      mode: 'no-cors',
       body: JSON.stringify({
         id_token: tokenResponse.idToken,
         access_token: tokenResponse.accessToken
