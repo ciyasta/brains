@@ -10,9 +10,9 @@ import { MsalProvider } from '@azure/msal-react';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ApolloProvider client={client}>
-      <MsalProvider instance={msalInstance}>
-        <App />
-      </MsalProvider>
+      {/* <MsalProvider instance={msalInstance}> */}
+      <App />
+      {/* </MsalProvider> */}
     </ApolloProvider>
   </StrictMode>,
 )
