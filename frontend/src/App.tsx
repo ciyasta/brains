@@ -20,18 +20,20 @@ function App() {
   const fetchToken = async () => {
     await instance.initialize();
     const tokenResponse = await instance.acquireTokenSilent({
-      scopes: ["api://1def8333-5f90-4bd2-ba69-294b0a52e80a/user_impersonation"]
+      scopes: ["api://1def8333-5f90-4bd2-ba69-294b0a52e80a/user_impersonation"],
+      account: accounts[0]
     });
     console.log(tokenResponse)
+  }
+
+  if (accounts.length === 0) {
+    return <LoginButton />
   }
 
   useEffect(() => {
     fetchToken()
   }, [])
 
-  if (accounts.length === 0) {
-    return <LoginButton />
-  }
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
