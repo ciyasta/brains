@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -17,9 +17,9 @@ function App() {
   const { instance } = useMsal();
   const account = instance.getActiveAccount();
   const { loading, error, data } = useQuery(GET_DATA);
-  if (!account) {
-    return <LoginButton />
-  }
+  // if (!account) {
+  //   return <LoginButton />
+  // }
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
