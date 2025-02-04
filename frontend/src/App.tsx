@@ -3,8 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { gql, useQuery } from '@apollo/client';
-import { useMsal } from '@azure/msal-react';
-import LoginButton from './components/loginButton';
+// import { useMsal } from '@azure/msal-react';
+// import LoginButton from './components/loginButton';
 
 const GET_DATA = gql`
   query{
