@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { gql, useQuery } from '@apollo/client';
+import { useMsal } from '@azure/msal-react';
+import LoginButton from './components/loginButton';
 
 const GET_DATA = gql`
   query{
@@ -12,8 +14,12 @@ const GET_DATA = gql`
 
 function App() {
   const [count, setCount] = useState(0)
+  const { instance } = useMsal();
+  const account = instance.getActiveAccount();
   const { loading, error, data } = useQuery(GET_DATA);
-
+  if (!account) {
+    return <LoginButton />
+  }
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
