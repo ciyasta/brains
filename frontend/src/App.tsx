@@ -24,6 +24,17 @@ function App() {
       account: accounts[0]
     });
     console.log(tokenResponse)
+    const authToken = await fetch("https://yoga-server.thankfulbush-f35cdce5.southindia.azurecontainerapps.io/.auth/login/aad", {
+      method: 'POST',
+      body: JSON.stringify({
+        id_token: tokenResponse.idToken,
+        access_token: tokenResponse.accessToken
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    console.log(authToken)
   }
 
   if (accounts.length === 0) {
