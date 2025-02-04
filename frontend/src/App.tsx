@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { gql, useQuery } from '@apollo/client';
 import { useMsal } from '@azure/msal-react';
-// import LoginButton from './components/loginButton';
+import LoginButton from './components/loginButton.tsx';
 
 const GET_DATA = gql`
   query{
@@ -16,12 +16,10 @@ function App() {
   const [count, setCount] = useState(0)
   const { accounts } = useMsal();
   console.log(accounts)
-
-  //const account = instance.getActiveAccount();
   const { loading, error, data } = useQuery(GET_DATA);
-  // if (!account) {
-  //   return <LoginButton />
-  // }
+  if (accounts.length === 0) {
+    return <LoginButton />
+  }
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
