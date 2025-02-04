@@ -14,8 +14,8 @@ const GET_DATA = gql`
 
 function App() {
   const [count, setCount] = useState(0)
-  const { instance } = useMsal();
-  const account = instance.getActiveAccount();
+  // const { instance } = useMsal();
+  // const account = instance.getActiveAccount();
   const { loading, error, data } = useQuery(GET_DATA);
   // if (!account) {
   //   return <LoginButton />
