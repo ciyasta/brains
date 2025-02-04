@@ -2,9 +2,23 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { gql, useQuery } from '@apollo/client';
+
+const GET_DATA = gql`
+  query GetData {
+    data {
+      id
+      name
+    }
+  }
+`;
 
 function App() {
   const [count, setCount] = useState(0)
+  const { loading, error, data } = useQuery(GET_DATA);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>
@@ -16,7 +30,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Vite + React + {data.data.hello}</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
