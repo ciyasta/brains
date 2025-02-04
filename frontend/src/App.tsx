@@ -34,7 +34,7 @@ function App() {
         "Content-Type": "application/json"
       }
     });
-    console.log(authToken)
+    console.log(authToken.json())
   }
 
   if (accounts.length === 0) {
