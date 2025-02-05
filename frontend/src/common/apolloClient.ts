@@ -1,8 +1,25 @@
 // apolloClient.js
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from "@apollo/client/link/context";
+
+const httpLink = createHttpLink({
+    uri: "https://yoga-server.thankfulbush-f35cdce5.southindia.azurecontainerapps.io/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+    // Retrieve the token from localStorage, sessionStorage, or a state management store
+    const token = localStorage.getItem("access_token");
+
+    return {
+        headers: {
+            ...headers,
+            Authorization: token ? `Bearer ${token}` : "",
+        }
+    };
+});
 
 const client = new ApolloClient({
-    uri: 'https://yoga-server.thankfulbush-f35cdce5.southindia.azurecontainerapps.io/graphql', // Replace with your GraphQL endpoint
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
 });
 

@@ -20,7 +20,7 @@ function App() {
   const fetchToken = async () => {
     await instance.initialize();
     const tokenResponse = await instance.acquireTokenSilent({
-      scopes: ["api://1def8333-5f90-4bd2-ba69-294b0a52e80a/user_impersonation"],
+      scopes: ["User.Read"],
       account: accounts[0]
     });
     console.log(tokenResponse)
